@@ -14,6 +14,8 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class DriveSubsystemTemplate extends SubsystemBase {
 
+    DriveTrainConfig config;
+
     /*
      *  This enumerator outlines the different configurations for
      *  the motor controllers of a possible 4 cim drivetrain
@@ -28,9 +30,19 @@ public class DriveSubsystemTemplate extends SubsystemBase {
     }
 
     public DriveSubsystemTemplate (DriveTrainConfig config) {
+        super();
+        this.config = config;
+        initDefaultCommand();
+    }
 
-        // 4 cim drivetrains only
-        BaseMotorController[] MotorControllers = new BaseMotorController[4];
+    public void specificInit () {
+        assignMotorControllers(config);
+    }
+
+    public void assignMotorControllers (DriveTrainConfig config) {
+
+        // Call to parent/superclass MotorController array variable
+        MotorControllers = new BaseMotorController[4];
 
         switch (config) {
             case TTTT:
@@ -55,6 +67,7 @@ public class DriveSubsystemTemplate extends SubsystemBase {
                                     new VictorSPX(3)};
                 break;
         }
+
     }
 
 }

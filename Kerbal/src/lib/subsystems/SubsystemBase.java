@@ -15,12 +15,9 @@ public abstract class SubsystemBase extends Subsystem {
     protected BaseMotorController[] MotorControllers;
 
     /*
-     *  Default Constructor with a list of BaseMotorController objects
-     *  (e.g., ctre Talon SRX, Victor SPX)
+     *  Default Constructor with no arguments
      */
-    public SubsystemBase (BaseMotorController[] MotorControllers) {
-        this.MotorController = MotorControllers;
-    }
+    public SubsystemBase () {    }
 
     /*
      *  initDefaultCommand method that calls an overridable special 
@@ -33,6 +30,6 @@ public abstract class SubsystemBase extends Subsystem {
     /*
      *  Method stub that is overrided. Called by initDefaultCommand
      */
-    public void specificInit() {    }
+    public void specificInit () {    }
 
 }
