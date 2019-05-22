@@ -12,7 +12,17 @@ import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 public class DriveSubsystemTemplate extends SubsystemBase {
+
+    /*
+     *  Superclass (SubsystemBase) MotorControllers array layout
+     *  MotorControllers[0] = Left1 (Left Master)
+     *  MotorControllers[1] = Left2 (Left Follower)
+     *  MotorControllers[2] = Right1 (Right Master)
+     *  MotorControllers[3] = Right2 (Right Follower)
+     */
 
     DriveTrainConfig config;
 
@@ -60,7 +70,7 @@ public class DriveSubsystemTemplate extends SubsystemBase {
                                     new VictorSPX(3)};
                 break;
             case VVVV:
-            MotorControllers = new BaseMotorController[]
+                MotorControllers = new BaseMotorController[]
                                    {new VictorSPX(0), 
                                     new VictorSPX(1), 
                                     new VictorSPX(2), 
@@ -68,6 +78,17 @@ public class DriveSubsystemTemplate extends SubsystemBase {
                 break;
         }
 
+    }
+
+    public void ArcadeDrive (double speed, double turn) {
+        TankDrive(speed - turn, - speed - turn);
+    }
+
+    public void TankDrive (double left, double right) {
+        runMotorControllers(0, left);
+        runMotorControllers(1, left);
+        runMotorControllers(2, right);
+        runMotorControllers(3, right);
     }
 
 }

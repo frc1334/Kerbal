@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 public abstract class SubsystemBase extends Subsystem {
 
     // Array of ctre BaseMotorController objects that represent motor controllers
@@ -31,5 +33,13 @@ public abstract class SubsystemBase extends Subsystem {
      *  Method stub that is overrided. Called by initDefaultCommand
      */
     public void specificInit () {    }
+
+    /*
+     *  Method that runs a BaseMotorController from the MotorController 
+     *  array (at index) with given a given power percentage
+     */
+    public void runMotorControllers (int deviceIndex, double power) {
+        BaseMotorController[deviceIndex].set(ControlMode.PercentOutput, power);
+    }
 
 }
